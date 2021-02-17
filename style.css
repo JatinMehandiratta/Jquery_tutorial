@@ -82,3 +82,10 @@ body {
   tr .highlight {
       background-color: #f9fafb;
   }
+  li {
+list-style-type: none;
+  }
+  #border{
+    border-right: solid black 2px;
+    border-radius: inherit;
+  }
