@@ -1,6 +1,8 @@
 body {
   font-size: 120%;
   background: #f8f8ff;
+  margin: 0px;
+  padding: 0px;
 }
 
 .header {
@@ -44,21 +46,11 @@ form,
   border: 1px solid black;
 }
 
-.btn {
-  padding: 10px;
-  font-size: 15px;
-  color: white;
-  background: #5f9ea0;
-  border: none;
-  border-radius: 5px;
-}
-
 .error {
-  width: 50%;
-  margin: 0px auto;
-  padding: 5px;
+  width: 100%;
+  margin: auto;
   color: #a94442;
-  text-align: center;
+  text-align: left;
 }
 
 .success {
@@ -87,3 +79,16 @@ li {
   border-right: solid black 2px;
   border-radius: inherit;
 }
+.card-header{
+  background-color:  gray;
+}
+.card {
+  border: 3px solid black;
+}
+.btn:disabled { 
+  opacity: 0.65 !important; 
+  cursor: not-allowed !important;
+  pointer-events: all !important;
+}
+
+

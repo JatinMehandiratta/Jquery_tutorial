@@ -18,12 +18,18 @@
     <div class="container mt-5">
         <div class="col-lg-8
            m-auto d-block">
-            <form method="post" id="myForm">
+            <form>
                 <div class="form-group mt-2 p-2">
                     <label for="email" class="mb-2">
                         Email:
                     </label>
                     <input type="text" name="email" id="email" class="form-control">
+                    <h5 id="emailempty" class="error">
+                        Please enter your Email.
+                    </h5>
+                    <h5 id="emailcheck" class="error">
+                        Please enter a valid Email .
+                    </h5>
                 </div>
 
                 <div class="form-group mt-2 p-2">
@@ -31,6 +37,12 @@
                         Password:
                     </label>
                     <input type="password" name="pass" id="password" class="form-control">
+                    <h5 id="passempty" class="error">
+                        Please enter your Password.
+                    </h5>
+                    <h5 id="passcheck" class="error">
+                        Password should be at leaset 6 digits with one upper case and one lowercase letter.
+                    </h5>
                 </div>
 
                 <div class="form-group mt-2 p-2">
@@ -38,9 +50,18 @@
                         Confirm Password:
                     </label>
                     <input type="password" name="conpassword" id="conpassword" class="form-control">
+                    <h5 id="conpassempty" class="error">
+                        Please enter your Confirm Password.
+                    </h5>
+                    <h5 id="conpasscheck" class="error">
+                        Password and Confirm Password do not Match.
+                    </h5>
+                    <h5 id="conpasscheck1" class="error">
+                        Confirm Password should be at leaset 6 digits with one upper case and one lowercase letter.
+                    </h5>
                 </div>
                 <div class="text-center mb-4 mt-4">
-                    <input type="submit" id="submitbtn" value="Submit" class="enable btn btn-success" disabled='disabled'>
+                    <input type="submit" id="submitbtn" value="Submit" class="btn btn-success" disabled='disabled'>
                 </div>
             </form>
         </div>
@@ -49,73 +70,108 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
-        function emailValidate() {
-            var hasError = false;
-            $('.error').hide();
-            $('#email').blur(function() {
-                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-                var emailaddressVal = $("#email").val();
-                if (emailaddressVal == '') {
-                    $("#email").after('<div class="error">Please enter your email address.</div>');
-                    hasError = true;
-                } else if (!emailReg.test(emailaddressVal)) {
-                    $("#email").after('<span class="error">Enter a valid email address.</span>');
-                    hasError = true;
-                }
-                if (hasError == true){
-                        $('#submitbtn').prop('disabled', true);
-                    }else {
-            $('#submitbtn').prop('disabled', false);
-        }
-            });
+        $('#passempty').hide();
+        $('#passcheck').hide();
+        $('#emailcheck').hide();
+        $('#emailempty').hide();
+        $('#conpassempty').hide();
+        $('#conpasscheck').hide();
+        $('#conpasscheck1').hide();
+
+        var emailError = false;
+        var passError = false;
+        var conpassError = false;
+
+        $('#email').blur(function() {
+
+            validateEmail();
+        });
+
+        function validateEmail() {
+            var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            var emailaddressVal = $("#email").val();
+            if (emailaddressVal == '') {
+                $('#emailempty').show();
+                $('#emailcheck').hide();
+                emailError = true;
+            } else if (!emailReg.test(emailaddressVal)) {
+                $('#emailcheck').show();
+                $('#emailempty').hide();
+                emailError = true;
+            } else {
+                $('#emailcheck').hide();
+                $('#emailempty').hide();
+                emailError = false;
+            }
+            if (emailError == false) {
+                $('#submitbtn').prop('disabled', false);
+            } else {
+                $('#submitbtn').prop('disabled', true);
+            }
         }
 
-        function passwordValidate() {
-            $('#password').blur(function() {
-                var hasError = false;
-                $('.error').hide();
-                var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-                var passwordVal = $("#password").val();
-                if (passwordVal == '') {
-                    $("#password").after('<div class="error">Please enter your Password.</div>');
-                    hasError = true;
-                } else if (passwordVal.match(passw)) {
-                    hasError = false;
-                } else {
-                    $("#password").after('<div class="error">Password should be at leaset 6 digits with one upper case and one lowercase letter.</div>');
-                    hasError = true;
-                }
-                if (hasError == true){
-                        $('#submitbtn').prop('disabled', true);
-                    }else {
-            $('#submitbtn').prop('disabled', false);
-        }
-                
-            });
+        $('#password').blur(function() {
+            validatePassword();
+        });
+
+        function validatePassword() {
+            var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+            var passwordVal = $("#password").val();
+            if (passwordVal == '') {
+                $('#passempty').show();
+                $('#passcheck').hide();
+                passError = true;
+            } else if (!passwordVal.match(passw)) {
+                $('#passcheck').show();
+                $('#passempty').hide();
+                passError = true;
+            } else {
+                $('#passcheck').hide();
+                $('#passempty').hide();
+                passError = false;
+            }
+            if (passError == false) {
+                $('#submitbtn').prop('disabled', false);
+            } else {
+                $('#submitbtn').prop('disabled', true);
+            }
         }
 
-        function conpasswordValidate() {
-            $('#conpassword').blur(function() {
-                var hasError = false;
-                var passwordVal = $("#password").val();
-                var conpasswordVal = $("#conpassword").val();
-                if (conpasswordVal == '') {
-                    $("#conpassword").after('<div class="error">Please enter your Confirm Password.</div>');
-                    hasError = true;
-                } else if (passwordVal !== conpasswordVal) {
-                    $("#conpassword").after('<div class="error">Password and Confrim Password do not Match.</div>');
-                    hasError = true;
-                }
-                    if (hasError == true){
-                        $('#submitbtn').prop('disabled', true);
-                    }else {
-            $('#submitbtn').prop('disabled', false);
+        $('#conpassword').blur(function() {
+            validateConfirmPassword();
+        });
+
+        function validateConfirmPassword() {
+            var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+            var conpasswordVal = $("#conpassword").val();
+            var passwordVal = $("#password").val();
+            if (conpasswordVal == '') {
+                $('#conpassempty').show();
+                $('#conpasscheck').hide();
+                $('#conpasscheck1').hide();
+                conpassError = true;
+            } else if (passwordVal !== conpasswordVal) {
+                $('#conpasscheck').show();
+                $('#conpassempty').hide();
+                $('#conpasscheck1').hide();
+                conpassError = true;
+            } else if (!conpasswordVal.match(passw)) {
+                $('#conpasscheck').hide();
+                $('#conpassempty').hide();
+                $('#conpasscheck1').show();
+                conpassError = true;
+            } else {
+                $('#conpasscheck').hide();
+                $('#conpassempty').hide();
+                $('#conpasscheck1').hide();
+                conpassError = false;
+            }
+            if (conpassError == false) {
+                $('#submitbtn').prop('disabled', false);
+            } else {
+                $('#submitbtn').prop('disabled', true);
+            }
         }
-            });
-        }
-        emailValidate();
-        passwordValidate();
-        conpasswordValidate();
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" type="text/javascript" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
