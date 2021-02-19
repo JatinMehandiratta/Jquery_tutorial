@@ -79,16 +79,14 @@ li {
   border-right: solid black 2px;
   border-radius: inherit;
 }
-.card-header{
-  background-color:  gray;
+.card-header {
+  background-color: gray;
 }
 .card {
   border: 3px solid black;
 }
-.btn:disabled { 
-  opacity: 0.65 !important; 
+.btn:disabled {
+  opacity: 0.65 !important;
   cursor: not-allowed !important;
   pointer-events: all !important;
 }
-
-

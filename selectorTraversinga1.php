@@ -94,32 +94,5 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" type="text/javascript" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
 </script>
-<script>
-    $('.nested input[type=checkbox]').click(function() {
-        $(this).parent().find('li input[type=checkbox]').prop('checked', $(this).is(':checked'));
-        var sibs = false;
-        $(this).closest('ul').children('li').each(function() {
-            if ($('input[type=checkbox]', this).is(':checked')) sibs = true;
-        })
-        $(this).parents('ul').prev().prop('checked', sibs);
-    });
-
-    $('input[type=checkbox]').click(function(){
-    if(this.checked){ // if checked - check all parent checkboxes
-        $(this).parents('li').children('input[type=checkbox]').prop('checked',true);
-    }
-    // children checkboxes depend on current checkbox
-    $(this).parent().find('input[type=checkbox]').prop('checked',this.checked); 
-});
-$.each($('.nested ul li').find(':checkbox'),  function(){
-    $(this).change(function (){
-        if ($(this).is(':checked')) {
-                      $(this).parentsUntil('.nested').siblings().filter('input:checkbox').attr('checked', true).trigger('change');
-        }else{                
-            $(this).parents('ul:first').siblings('input:checkbox').prop('checked', $(this).parent().siblings().children('input:checked').length).trigger('change');
-        }        
-    });    
-});
-</script>
 
 </html>
