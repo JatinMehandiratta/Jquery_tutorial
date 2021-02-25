@@ -15,8 +15,6 @@ $(document).ready(function () {
     };
     $('.MYCLASS').jqzoom(options);
 });
-
-
 $(document).ready(function () {
     $('.jqzoom2').jqzoom({
         zoomType: 'innerzoom',
