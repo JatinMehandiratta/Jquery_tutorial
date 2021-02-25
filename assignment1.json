@@ -1,11 +1,7 @@
- [{
+[
+  {
     "firstname": "John",
     "lastname": "doe",
     "dob": "21/01/1997"
-},
-{
-    "firstname" : "Nancy",
-    "lastname" : "Kevel",
-    "dob" : "26/10/1957"
-}
+  }
 ]
