@@ -1,6 +1,5 @@
 <!doctype html5>
 <html>
-
 <head>
     <title>Fancy Box</title>
     <meta charset="utf-8">
@@ -9,7 +8,6 @@
     <link href="css/jquery.fancybox.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
 <body>
     <p>
         Examples of displaying images individually and combining into a gallery
